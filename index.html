@@ -7,162 +7,70 @@
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #0e0e10;
-    --surface: #17171a;
-    --surface2: #1e1e22;
-    --surface3: #26262b;
-    --border: rgba(255,255,255,0.07);
-    --border2: rgba(255,255,255,0.12);
-    --text: #f0eff2;
-    --text2: #9997a3;
-    --text3: #5a5865;
-    --accent: #7c6af7;
-    --accent2: #a598ff;
-    --green: #3ecf8e;
-    --amber: #f5a623;
-    --red: #f26d6d;
-    --teal: #3ecfcf;
-    --pink: #e879a0;
-    --radius: 12px;
-    --radius-sm: 8px;
+    --bg: #0e0e10; --surface: #17171a; --surface2: #1e1e22; --surface3: #26262b;
+    --border: rgba(255,255,255,0.07); --border2: rgba(255,255,255,0.12);
+    --text: #f0eff2; --text2: #9997a3; --text3: #5a5865;
+    --accent: #7c6af7; --accent2: #a598ff;
+    --green: #3ecf8e; --amber: #f5a623; --red: #f26d6d; --teal: #3ecfcf; --pink: #e879a0;
+    --radius: 12px; --radius-sm: 8px;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  body {
-    font-family: 'DM Sans', sans-serif;
-    background: var(--bg);
-    color: var(--text);
-    min-height: 100vh;
-    font-size: 14px;
-    line-height: 1.6;
-  }
-  ::-webkit-scrollbar { width: 6px; }
-  ::-webkit-scrollbar-track { background: transparent; }
-  ::-webkit-scrollbar-thumb { background: var(--surface3); border-radius: 3px; }
-
-  /* Layout */
+  body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; font-size: 14px; line-height: 1.6; }
+  ::-webkit-scrollbar { width: 6px; } ::-webkit-scrollbar-track { background: transparent; } ::-webkit-scrollbar-thumb { background: var(--surface3); border-radius: 3px; }
   .app { display: flex; min-height: 100vh; }
-  .sidebar {
-    width: 220px;
-    background: var(--surface);
-    border-right: 1px solid var(--border);
-    padding: 24px 0;
-    flex-shrink: 0;
-    display: flex;
-    flex-direction: column;
-    position: fixed;
-    height: 100vh;
-    overflow-y: auto;
-  }
+  .sidebar { width: 220px; background: var(--surface); border-right: 1px solid var(--border); padding: 24px 0; flex-shrink: 0; display: flex; flex-direction: column; position: fixed; height: 100vh; overflow-y: auto; }
   .main { margin-left: 220px; padding: 32px; flex: 1; max-width: 1100px; }
-
-  /* Sidebar */
-  .logo {
-    padding: 0 20px 24px;
-    border-bottom: 1px solid var(--border);
-    margin-bottom: 20px;
-  }
+  .logo { padding: 0 20px 24px; border-bottom: 1px solid var(--border); margin-bottom: 20px; }
   .logo-text { font-size: 16px; font-weight: 500; color: var(--text); letter-spacing: -.02em; }
   .logo-sub { font-size: 11px; color: var(--text3); margin-top: 2px; font-family: 'DM Mono', monospace; }
   .nav-section { padding: 0 12px; margin-bottom: 20px; }
   .nav-label { font-size: 10px; color: var(--text3); letter-spacing: .08em; text-transform: uppercase; padding: 0 8px; margin-bottom: 6px; }
-  .nav-item {
-    display: flex; align-items: center; gap: 8px;
-    padding: 7px 8px; border-radius: var(--radius-sm);
-    cursor: pointer; color: var(--text2); font-size: 13px;
-    transition: all .15s; border: none; background: transparent;
-    width: 100%; text-align: left; font-family: 'DM Sans', sans-serif;
-  }
+  .nav-item { display: flex; align-items: center; gap: 8px; padding: 7px 8px; border-radius: var(--radius-sm); cursor: pointer; color: var(--text2); font-size: 13px; transition: all .15s; border: none; background: transparent; width: 100%; text-align: left; font-family: 'DM Sans', sans-serif; }
   .nav-item:hover { background: var(--surface2); color: var(--text); }
   .nav-item.active { background: var(--surface3); color: var(--text); }
   .nav-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
-  .nav-count {
-    margin-left: auto; font-size: 10px; background: var(--surface3);
-    color: var(--text3); padding: 1px 6px; border-radius: 10px;
-    font-family: 'DM Mono', monospace;
-  }
+  .nav-count { margin-left: auto; font-size: 10px; background: var(--surface3); color: var(--text3); padding: 1px 6px; border-radius: 10px; font-family: 'DM Mono', monospace; }
   .sidebar-footer { margin-top: auto; padding: 16px 20px; border-top: 1px solid var(--border); }
-  .add-project-btn {
-    width: 100%; padding: 9px; background: var(--accent);
-    color: #fff; border: none; border-radius: var(--radius-sm);
-    font-size: 13px; font-weight: 500; cursor: pointer;
-    font-family: 'DM Sans', sans-serif; transition: opacity .15s;
-  }
+  .add-project-btn { width: 100%; padding: 9px; background: var(--accent); color: #fff; border: none; border-radius: var(--radius-sm); font-size: 13px; font-weight: 500; cursor: pointer; font-family: 'DM Sans', sans-serif; transition: opacity .15s; }
   .add-project-btn:hover { opacity: .85; }
-
-  /* Header */
   .page-header { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 28px; flex-wrap: wrap; gap: 16px; }
-  .page-title { font-size: 24px; font-weight: 500; letter-spacing: -.03em; color: var(--text); }
+  .page-title { font-size: 24px; font-weight: 500; letter-spacing: -.03em; }
   .page-date { font-size: 12px; color: var(--text3); font-family: 'DM Mono', monospace; margin-top: 4px; }
   .header-actions { display: flex; gap: 8px; }
-  .btn {
-    padding: 8px 16px; border-radius: var(--radius-sm); font-size: 13px;
-    cursor: pointer; font-family: 'DM Sans', sans-serif; border: 1px solid var(--border2);
-    background: var(--surface2); color: var(--text2); transition: all .15s;
-  }
-  .btn:hover { background: var(--surface3); color: var(--text); border-color: var(--border2); }
+  .btn { padding: 8px 16px; border-radius: var(--radius-sm); font-size: 13px; cursor: pointer; font-family: 'DM Sans', sans-serif; border: 1px solid var(--border2); background: var(--surface2); color: var(--text2); transition: all .15s; }
+  .btn:hover { background: var(--surface3); color: var(--text); }
   .btn-primary { background: var(--accent); color: #fff; border-color: var(--accent); }
   .btn-primary:hover { opacity: .85; background: var(--accent); color: #fff; }
-
-  /* Metrics */
   .metrics-grid { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 12px; margin-bottom: 28px; }
-  .metric-card {
-    background: var(--surface); border: 1px solid var(--border);
-    border-radius: var(--radius); padding: 16px 18px;
-  }
+  .metric-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 16px 18px; }
   .metric-label { font-size: 11px; color: var(--text3); margin-bottom: 8px; text-transform: uppercase; letter-spacing: .06em; }
   .metric-value { font-size: 28px; font-weight: 300; color: var(--text); letter-spacing: -.04em; font-family: 'DM Mono', monospace; }
-  .metric-sub { font-size: 11px; color: var(--text3); margin-top: 4px; }
   .metric-accent { width: 28px; height: 2px; border-radius: 1px; margin-bottom: 10px; }
-
-  /* Filters */
   .filters { display: flex; gap: 6px; margin-bottom: 20px; flex-wrap: wrap; align-items: center; }
   .filter-label { font-size: 12px; color: var(--text3); margin-right: 4px; }
-  .filter-pill {
-    padding: 5px 14px; border-radius: 20px; border: 1px solid var(--border);
-    font-size: 12px; cursor: pointer; background: transparent; color: var(--text2);
-    transition: all .15s; font-family: 'DM Sans', sans-serif;
-  }
+  .filter-pill { padding: 5px 14px; border-radius: 20px; border: 1px solid var(--border); font-size: 12px; cursor: pointer; background: transparent; color: var(--text2); transition: all .15s; font-family: 'DM Sans', sans-serif; }
   .filter-pill:hover { border-color: var(--border2); color: var(--text); }
   .filter-pill.active { background: var(--accent); color: #fff; border-color: var(--accent); }
-
-  /* Projects grid */
   .projects-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 14px; }
-  .project-card {
-    background: var(--surface); border: 1px solid var(--border);
-    border-radius: var(--radius); padding: 20px;
-    cursor: pointer; transition: all .2s; position: relative; overflow: hidden;
-  }
-  .project-card::before {
-    content: ''; position: absolute; top: 0; left: 0; right: 0;
-    height: 2px; background: var(--card-color, var(--accent));
-  }
+  .project-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px; cursor: pointer; transition: all .2s; position: relative; overflow: hidden; animation: fadeIn .25s ease both; }
+  .project-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: var(--card-color, var(--accent)); }
   .project-card:hover { border-color: var(--border2); transform: translateY(-1px); }
   .card-header { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 12px; }
   .card-badges { display: flex; gap: 5px; flex-wrap: wrap; }
-  .badge {
-    font-size: 10px; padding: 2px 8px; border-radius: 10px; font-weight: 500;
-    font-family: 'DM Mono', monospace; letter-spacing: .02em;
-  }
-  .badge-type { background: rgba(124,106,247,.15); color: var(--accent2); }
+  .badge { font-size: 10px; padding: 2px 8px; border-radius: 10px; font-weight: 500; font-family: 'DM Mono', monospace; }
   .b-startup { background: rgba(124,106,247,.15); color: #a598ff; }
   .b-client { background: rgba(62,207,142,.12); color: #3ecf8e; }
   .b-perso { background: rgba(232,121,160,.12); color: #e879a0; }
+  .b-event { background: rgba(213,90,48,.15); color: #f5a083; }
   .b-agence { background: rgba(245,166,35,.12); color: #f5a623; }
   .b-autre { background: rgba(90,88,101,.2); color: #9997a3; }
   .s-active { background: rgba(62,207,142,.12); color: #3ecf8e; }
   .s-planning { background: rgba(245,166,35,.12); color: #f5a623; }
   .s-hold { background: rgba(242,109,109,.12); color: #f26d6d; }
   .s-done { background: rgba(62,207,207,.12); color: #3ecfcf; }
-  .card-menu {
-    display: flex; gap: 4px; opacity: 0; transition: opacity .15s;
-  }
+  .card-menu { display: flex; gap: 4px; opacity: 0; transition: opacity .15s; }
   .project-card:hover .card-menu { opacity: 1; }
-  .icon-btn {
-    width: 26px; height: 26px; border-radius: 6px; border: 1px solid var(--border);
-    background: var(--surface2); color: var(--text3); cursor: pointer;
-    font-size: 13px; display: flex; align-items: center; justify-content: center;
-    transition: all .15s;
-  }
+  .icon-btn { width: 26px; height: 26px; border-radius: 6px; border: 1px solid var(--border); background: var(--surface2); color: var(--text3); cursor: pointer; font-size: 13px; display: flex; align-items: center; justify-content: center; transition: all .15s; }
   .icon-btn:hover { background: var(--surface3); color: var(--text2); }
   .card-title { font-size: 15px; font-weight: 500; color: var(--text); margin-bottom: 6px; letter-spacing: -.02em; }
   .card-desc { font-size: 12px; color: var(--text2); line-height: 1.6; margin-bottom: 14px; }
@@ -172,78 +80,36 @@
   .progress-pct { font-size: 11px; color: var(--text3); min-width: 30px; text-align: right; font-family: 'DM Mono', monospace; }
   .card-footer { display: flex; align-items: center; justify-content: space-between; }
   .card-meta { font-size: 11px; color: var(--text3); font-family: 'DM Mono', monospace; }
-  .card-actions-btn {
-    font-size: 11px; color: var(--accent2); background: rgba(124,106,247,.1);
-    border: none; border-radius: 6px; padding: 3px 8px; cursor: pointer;
-    font-family: 'DM Sans', sans-serif; transition: background .15s;
-  }
-  .card-actions-btn:hover { background: rgba(124,106,247,.2); }
-  .add-card {
-    border: 1px dashed var(--border); background: transparent;
-    display: flex; align-items: center; justify-content: center;
-    flex-direction: column; gap: 8px; min-height: 200px;
-    border-radius: var(--radius); cursor: pointer; color: var(--text3);
-    font-size: 13px; transition: all .15s;
-  }
+  .card-tag { font-size: 11px; color: var(--accent2); background: rgba(124,106,247,.1); border: none; border-radius: 6px; padding: 3px 8px; cursor: pointer; font-family: 'DM Sans', sans-serif; transition: background .15s; }
+  .card-tag:hover { background: rgba(124,106,247,.2); }
+  .add-card { border: 1px dashed var(--border); background: transparent; display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 8px; min-height: 200px; border-radius: var(--radius); cursor: pointer; color: var(--text3); font-size: 13px; transition: all .15s; }
   .add-card:hover { border-color: var(--border2); color: var(--text2); background: var(--surface); }
-  .add-icon-large { font-size: 24px; opacity: .5; }
-
-  /* Modal */
-  .modal-overlay {
-    display: none; position: fixed; inset: 0;
-    background: rgba(0,0,0,.6); z-index: 1000;
-    align-items: center; justify-content: center; padding: 20px;
-  }
+  .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,.6); z-index: 1000; align-items: center; justify-content: center; padding: 20px; }
   .modal-overlay.open { display: flex; }
-  .modal {
-    background: var(--surface); border: 1px solid var(--border2);
-    border-radius: var(--radius); padding: 28px; width: 100%;
-    max-width: 460px; max-height: 85vh; overflow-y: auto;
-  }
-  .modal-title { font-size: 17px; font-weight: 500; color: var(--text); margin-bottom: 20px; letter-spacing: -.02em; }
+  .modal { background: var(--surface); border: 1px solid var(--border2); border-radius: var(--radius); padding: 28px; width: 100%; max-width: 460px; max-height: 85vh; overflow-y: auto; }
+  .modal-title { font-size: 17px; font-weight: 500; margin-bottom: 20px; letter-spacing: -.02em; }
   .form-group { margin-bottom: 14px; }
   .form-label { font-size: 11px; color: var(--text3); margin-bottom: 5px; display: block; text-transform: uppercase; letter-spacing: .06em; }
-  .form-input {
-    width: 100%; padding: 9px 12px; border: 1px solid var(--border);
-    border-radius: var(--radius-sm); font-size: 13px;
-    background: var(--surface2); color: var(--text);
-    font-family: 'DM Sans', sans-serif; transition: border-color .15s;
-  }
+  .form-input { width: 100%; padding: 9px 12px; border: 1px solid var(--border); border-radius: var(--radius-sm); font-size: 13px; background: var(--surface2); color: var(--text); font-family: 'DM Sans', sans-serif; transition: border-color .15s; }
   .form-input:focus { outline: none; border-color: var(--accent); }
   .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
   .modal-actions { display: flex; gap: 8px; margin-top: 20px; justify-content: flex-end; }
-
-  /* Project detail panel */
-  .detail-panel {
-    display: none; position: fixed; right: 0; top: 0; bottom: 0;
-    width: 480px; background: var(--surface); border-left: 1px solid var(--border);
-    z-index: 100; overflow-y: auto; padding: 28px;
-    transform: translateX(100%); transition: transform .25s ease;
-  }
+  .detail-panel { display: none; position: fixed; right: 0; top: 0; bottom: 0; width: 500px; background: var(--surface); border-left: 1px solid var(--border); z-index: 100; overflow-y: auto; padding: 28px; transform: translateX(100%); transition: transform .25s ease; }
   .detail-panel.open { display: block; transform: translateX(0); }
-  .panel-close {
-    position: absolute; top: 20px; right: 20px;
-    width: 30px; height: 30px; border-radius: 8px; border: 1px solid var(--border);
-    background: var(--surface2); color: var(--text3); cursor: pointer;
-    font-size: 16px; display: flex; align-items: center; justify-content: center;
-  }
+  .panel-close { position: absolute; top: 20px; right: 20px; width: 30px; height: 30px; border-radius: 8px; border: 1px solid var(--border); background: var(--surface2); color: var(--text3); cursor: pointer; font-size: 16px; display: flex; align-items: center; justify-content: center; }
   .panel-close:hover { color: var(--text); }
-  .panel-tabs { display: flex; gap: 2px; margin: 20px 0; background: var(--surface2); border-radius: var(--radius-sm); padding: 3px; }
-  .panel-tab {
-    flex: 1; padding: 6px 8px; border-radius: 6px; font-size: 12px;
-    cursor: pointer; text-align: center; color: var(--text2);
-    transition: all .15s; border: none; background: transparent; font-family: 'DM Sans', sans-serif;
-  }
+  .panel-tabs { display: flex; gap: 2px; margin: 20px 0; background: var(--surface2); border-radius: var(--radius-sm); padding: 3px; flex-wrap: wrap; }
+  .panel-tab { flex: 1; padding: 6px 8px; border-radius: 6px; font-size: 12px; cursor: pointer; text-align: center; color: var(--text2); transition: all .15s; border: none; background: transparent; font-family: 'DM Sans', sans-serif; min-width: 70px; }
   .panel-tab.active { background: var(--surface3); color: var(--text); }
   .panel-section { display: none; }
   .panel-section.active { display: block; }
   .phase-item { margin-bottom: 14px; }
-  .phase-header-row { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; }
+  .phase-hrow { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; }
   .phase-dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
   .phase-name { font-size: 13px; font-weight: 500; color: var(--text); }
   .phase-weeks { font-size: 11px; color: var(--text3); margin-left: auto; font-family: 'DM Mono', monospace; }
-  .phase-tasks-list { padding-left: 22px; }
-  .phase-task { font-size: 12px; color: var(--text2); padding: 2px 0; display: flex; gap: 6px; align-items: flex-start; }
+  .phase-tasks { padding-left: 22px; }
+  .phase-task { font-size: 12px; color: var(--text2); padding: 2px 0; display: flex; gap: 6px; }
   .phase-task::before { content: '—'; color: var(--text3); flex-shrink: 0; }
   .action-item { display: flex; gap: 10px; padding: 10px 0; border-bottom: 1px solid var(--border); }
   .action-item:last-child { border: none; }
@@ -255,78 +121,52 @@
   .action-note { font-size: 12px; color: var(--text2); margin-top: 2px; }
   .kpi-item { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid var(--border); }
   .kpi-item:last-child { border: none; }
-  .kpi-name-txt { font-size: 13px; color: var(--text2); }
-  .kpi-target-txt { font-size: 13px; font-weight: 500; color: var(--text); font-family: 'DM Mono', monospace; }
-  .empty-panel { text-align: center; padding: 40px 20px; color: var(--text3); font-size: 13px; }
-
-  /* Responsive */
-  @media (max-width: 768px) {
-    .sidebar { width: 60px; }
-    .sidebar .logo-text, .sidebar .logo-sub, .nav-label, .nav-item span, .nav-count, .sidebar-footer .add-project-btn { display: none; }
-    .main { margin-left: 60px; padding: 20px; }
-    .metrics-grid { grid-template-columns: repeat(2, 1fr); }
-    .detail-panel { width: 100%; }
-  }
-
-  /* Animations */
+  .kpi-name-t { font-size: 13px; color: var(--text2); }
+  .kpi-val { font-size: 13px; font-weight: 500; color: var(--text); font-family: 'DM Mono', monospace; }
+  .risk-item { padding: 10px 0; border-bottom: 1px solid var(--border); }
+  .risk-item:last-child { border: none; }
+  .risk-hrow { display: flex; align-items: center; gap: 8px; margin-bottom: 4px; }
+  .rlevel { font-size: 10px; padding: 2px 7px; border-radius: 8px; font-weight: 500; font-family: 'DM Mono', monospace; }
+  .r-high { background: rgba(242,109,109,.15); color: #f26d6d; }
+  .r-med { background: rgba(245,166,35,.15); color: #f5a623; }
+  .r-low { background: rgba(62,207,142,.15); color: #3ecf8e; }
+  .risk-title { font-size: 13px; font-weight: 500; color: var(--text); }
+  .risk-mit { font-size: 12px; color: var(--text2); }
+  .empty-panel { text-align: center; padding: 40px 20px; color: var(--text3); font-size: 13px; line-height: 1.8; }
+  .panel-cta { display: flex; gap: 8px; margin-top: 20px; flex-wrap: wrap; }
+  .panel-btn { padding: 8px 14px; border-radius: var(--radius-sm); font-size: 12px; cursor: pointer; font-family: 'DM Sans', sans-serif; border: 1px solid var(--border2); background: transparent; color: var(--text2); transition: all .15s; }
+  .panel-btn:hover { background: var(--surface2); color: var(--text); }
+  .panel-btn-primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .panel-btn-primary:hover { opacity: .85; background: var(--accent); color: #fff; }
+  .vision-item { font-size: 12px; color: var(--text2); padding: 4px 0; display: flex; gap: 8px; }
+  .vision-item::before { content: '→'; color: var(--accent2); flex-shrink: 0; }
+  .vision-block { margin-bottom: 16px; }
+  .vision-block-title { font-size: 12px; font-weight: 500; color: var(--text3); text-transform: uppercase; letter-spacing: .06em; margin-bottom: 6px; }
   @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
-  .project-card { animation: fadeIn .25s ease both; }
+  @media (max-width: 768px) { .sidebar { width: 60px; } .sidebar .logo-text, .sidebar .logo-sub, .nav-label, .nav-item span, .nav-count, .sidebar-footer .add-project-btn { display: none; } .main { margin-left: 60px; padding: 20px; } .metrics-grid { grid-template-columns: repeat(2,1fr); } .detail-panel { width: 100%; } }
 </style>
 </head>
 <body>
-
 <div class="app">
   <aside class="sidebar">
     <div class="logo">
       <div class="logo-text">Hub Projets</div>
-      <div class="logo-sub">v1.0 — 2026</div>
+      <div class="logo-sub">v2.0 — 2026</div>
     </div>
     <div class="nav-section">
       <div class="nav-label">Vues</div>
-      <button class="nav-item active" onclick="setFilter('all',this)">
-        <div class="nav-dot" style="background:#7c6af7"></div>
-        <span>Tous les projets</span>
-        <span class="nav-count" id="nav-all">0</span>
-      </button>
-      <button class="nav-item" onclick="setFilter('active',this)">
-        <div class="nav-dot" style="background:#3ecf8e"></div>
-        <span>En cours</span>
-        <span class="nav-count" id="nav-active">0</span>
-      </button>
-      <button class="nav-item" onclick="setFilter('planning',this)">
-        <div class="nav-dot" style="background:#f5a623"></div>
-        <span>Planification</span>
-        <span class="nav-count" id="nav-planning">0</span>
-      </button>
-      <button class="nav-item" onclick="setFilter('hold',this)">
-        <div class="nav-dot" style="background:#f26d6d"></div>
-        <span>En pause</span>
-        <span class="nav-count" id="nav-hold">0</span>
-      </button>
-      <button class="nav-item" onclick="setFilter('done',this)">
-        <div class="nav-dot" style="background:#3ecfcf"></div>
-        <span>Terminés</span>
-        <span class="nav-count" id="nav-done">0</span>
-      </button>
+      <button class="nav-item active" onclick="setFilter('all',this)"><div class="nav-dot" style="background:#7c6af7"></div><span>Tous les projets</span><span class="nav-count" id="nav-all">0</span></button>
+      <button class="nav-item" onclick="setFilter('active',this)"><div class="nav-dot" style="background:#3ecf8e"></div><span>En cours</span><span class="nav-count" id="nav-active">0</span></button>
+      <button class="nav-item" onclick="setFilter('planning',this)"><div class="nav-dot" style="background:#f5a623"></div><span>Planification</span><span class="nav-count" id="nav-planning">0</span></button>
+      <button class="nav-item" onclick="setFilter('hold',this)"><div class="nav-dot" style="background:#f26d6d"></div><span>En pause</span><span class="nav-count" id="nav-hold">0</span></button>
+      <button class="nav-item" onclick="setFilter('done',this)"><div class="nav-dot" style="background:#3ecfcf"></div><span>Terminés</span><span class="nav-count" id="nav-done">0</span></button>
     </div>
     <div class="nav-section">
       <div class="nav-label">Types</div>
-      <button class="nav-item" onclick="setFilter('startup',this)">
-        <div class="nav-dot" style="background:#a598ff"></div>
-        <span>Startup</span>
-      </button>
-      <button class="nav-item" onclick="setFilter('client',this)">
-        <div class="nav-dot" style="background:#3ecf8e"></div>
-        <span>Client</span>
-      </button>
-      <button class="nav-item" onclick="setFilter('perso',this)">
-        <div class="nav-dot" style="background:#e879a0"></div>
-        <span>Personnel</span>
-      </button>
-      <button class="nav-item" onclick="setFilter('agence',this)">
-        <div class="nav-dot" style="background:#f5a623"></div>
-        <span>Agence</span>
-      </button>
+      <button class="nav-item" onclick="setFilter('startup',this)"><div class="nav-dot" style="background:#a598ff"></div><span>Startup</span></button>
+      <button class="nav-item" onclick="setFilter('event',this)"><div class="nav-dot" style="background:#f5a083"></div><span>Événement</span></button>
+      <button class="nav-item" onclick="setFilter('perso',this)"><div class="nav-dot" style="background:#e879a0"></div><span>Personnel</span></button>
+      <button class="nav-item" onclick="setFilter('client',this)"><div class="nav-dot" style="background:#3ecf8e"></div><span>Client</span></button>
     </div>
     <div class="sidebar-footer">
       <button class="add-project-btn" onclick="openModal()">+ Nouveau projet</button>
@@ -344,190 +184,139 @@
         <button class="btn btn-primary" onclick="openModal()">+ Nouveau</button>
       </div>
     </div>
-
     <div class="metrics-grid">
-      <div class="metric-card">
-        <div class="metric-accent" style="background:#7c6af7"></div>
-        <div class="metric-label">Total projets</div>
-        <div class="metric-value" id="m-total">0</div>
-      </div>
-      <div class="metric-card">
-        <div class="metric-accent" style="background:#3ecf8e"></div>
-        <div class="metric-label">En cours</div>
-        <div class="metric-value" id="m-active">0</div>
-      </div>
-      <div class="metric-card">
-        <div class="metric-accent" style="background:#f5a623"></div>
-        <div class="metric-label">Actions à faire</div>
-        <div class="metric-value" id="m-actions">0</div>
-      </div>
-      <div class="metric-card">
-        <div class="metric-accent" style="background:#a598ff"></div>
-        <div class="metric-label">Avancement moyen</div>
-        <div class="metric-value" id="m-avg">0%</div>
-      </div>
+      <div class="metric-card"><div class="metric-accent" style="background:#7c6af7"></div><div class="metric-label">Total projets</div><div class="metric-value" id="m-total">0</div></div>
+      <div class="metric-card"><div class="metric-accent" style="background:#3ecf8e"></div><div class="metric-label">En cours</div><div class="metric-value" id="m-active">0</div></div>
+      <div class="metric-card"><div class="metric-accent" style="background:#f5a623"></div><div class="metric-label">Actions à faire</div><div class="metric-value" id="m-actions">0</div></div>
+      <div class="metric-card"><div class="metric-accent" style="background:#a598ff"></div><div class="metric-label">Avancement moyen</div><div class="metric-value" id="m-avg">0%</div></div>
     </div>
-
     <div class="filters">
       <span class="filter-label">Filtrer :</span>
       <button class="filter-pill active" onclick="setFilter('all',this)">Tous</button>
       <button class="filter-pill" onclick="setFilter('active',this)">En cours</button>
       <button class="filter-pill" onclick="setFilter('planning',this)">Planification</button>
       <button class="filter-pill" onclick="setFilter('hold',this)">En pause</button>
-      <button class="filter-pill" onclick="setFilter('done',this)">Terminé</button>
       <button class="filter-pill" onclick="setFilter('startup',this)">Startup</button>
-      <button class="filter-pill" onclick="setFilter('client',this)">Client</button>
+      <button class="filter-pill" onclick="setFilter('event',this)">Événement</button>
       <button class="filter-pill" onclick="setFilter('perso',this)">Perso</button>
     </div>
-
     <div class="projects-grid" id="grid"></div>
   </main>
 </div>
 
-<!-- Modal -->
 <div class="modal-overlay" id="modal">
   <div class="modal">
     <div class="modal-title">Nouveau projet</div>
-    <div class="form-group">
-      <label class="form-label">Nom du projet</label>
-      <input class="form-input" id="f-title" placeholder="Ex: Agent IA WhatsApp">
-    </div>
-    <div class="form-group">
-      <label class="form-label">Description</label>
-      <textarea class="form-input" id="f-desc" rows="2" placeholder="En quoi consiste ce projet ?"></textarea>
-    </div>
+    <div class="form-group"><label class="form-label">Nom du projet</label><input class="form-input" id="f-title" placeholder="Ex: Mon nouveau projet"></div>
+    <div class="form-group"><label class="form-label">Description</label><textarea class="form-input" id="f-desc" rows="2" placeholder="En quoi consiste ce projet ?"></textarea></div>
     <div class="form-row">
-      <div class="form-group">
-        <label class="form-label">Type</label>
+      <div class="form-group"><label class="form-label">Type</label>
         <select class="form-input" id="f-type">
-          <option value="startup">Startup</option>
-          <option value="client">Client</option>
-          <option value="perso">Personnel</option>
-          <option value="agence">Agence</option>
-          <option value="autre">Autre</option>
+          <option value="startup">Startup</option><option value="event">Événement</option>
+          <option value="perso">Personnel</option><option value="client">Client</option>
+          <option value="agence">Agence</option><option value="autre">Autre</option>
         </select>
       </div>
-      <div class="form-group">
-        <label class="form-label">Statut</label>
+      <div class="form-group"><label class="form-label">Statut</label>
         <select class="form-input" id="f-status">
-          <option value="planning">Planification</option>
-          <option value="active">En cours</option>
-          <option value="hold">En pause</option>
-          <option value="done">Terminé</option>
+          <option value="planning">Planification</option><option value="active">En cours</option>
+          <option value="hold">En pause</option><option value="done">Terminé</option>
         </select>
       </div>
     </div>
-    <div class="form-group">
-      <label class="form-label">Avancement (%)</label>
-      <input class="form-input" id="f-progress" type="number" min="0" max="100" value="0">
-    </div>
-    <div class="form-group">
-      <label class="form-label">Échéance / Note</label>
-      <input class="form-input" id="f-date" placeholder="Ex: Q3 2026">
-    </div>
-    <div class="modal-actions">
-      <button class="btn" onclick="closeModal()">Annuler</button>
-      <button class="btn btn-primary" onclick="addProject()">Créer le projet</button>
-    </div>
+    <div class="form-group"><label class="form-label">Avancement (%)</label><input class="form-input" id="f-progress" type="number" min="0" max="100" value="0"></div>
+    <div class="form-group"><label class="form-label">Échéance / Note</label><input class="form-input" id="f-date" placeholder="Ex: Q3 2026"></div>
+    <div class="modal-actions"><button class="btn" onclick="closeModal()">Annuler</button><button class="btn btn-primary" onclick="addProject()">Créer</button></div>
   </div>
 </div>
 
-<!-- Detail Panel -->
 <div class="detail-panel" id="detail-panel">
   <button class="panel-close" onclick="closePanel()">✕</button>
   <div id="panel-content"></div>
 </div>
 
 <script>
-const TYPE_COLORS = {
-  startup: '#7c6af7', client: '#3ecf8e', perso: '#e879a0',
-  agence: '#f5a623', associatif: '#3ecfcf', autre: '#9997a3'
-};
+const TYPE_COLORS = { startup:'#7c6af7', event:'#c44bd8', perso:'#e879a0', client:'#3ecf8e', agence:'#f5a623', autre:'#9997a3' };
 
 const PROJECT_DATA = {
   1: {
+    vision: {
+      court: ['Lancer le FIMANI TEXTURES FESTIVAL : 1ère édition virtuelle mondiale','Fédérer une communauté de 500+ personnes engagées','Atteindre 1 000 abonnés TikTok pour activer le live','Valider le concept et générer les premiers revenus via affiliation'],
+      long: ['FIMANI TEXTURES FESTIVAL : événement annuel avec éditions payantes','FIMANI TEXTURES ACADÉMIE : plateforme annuaire + formations en replay','Monétisation : abonnements pros, affiliations, sponsors, tickets','Expansion internationale : Canada, Afrique francophone, Antilles']
+    },
     phases: [
-      { name: 'Cadrage & validation', weeks: 'Sem. 1–2', color: '#7c6af7', tasks: ['Interviews de 5 à 10 vendeurs cibles', 'Définir les types de commandes à automatiser', 'Identifier les intégrations nécessaires', 'Valider l\'accès à l\'API WhatsApp Business'] },
-      { name: 'Prototype & architecture', weeks: 'Sem. 3–5', color: '#378ADD', tasks: ['Choisir la stack : LLM + framework agent', 'Construire le premier flow de conversation', 'Mettre en place la reconnaissance d\'intention', 'Tester en environnement sandbox WhatsApp'] },
-      { name: 'MVP & tests terrain', weeks: 'Sem. 6–8', color: '#3ecf8e', tasks: ['Déploiement auprès de 3 à 5 vendeurs pilotes', 'Mesurer le taux de complétion des commandes', 'Recueillir les feedbacks et affiner les flows'] },
-      { name: 'Industrialisation & GTM', weeks: 'Sem. 9–16', color: '#f5a623', tasks: ['Scalabilité multi-vendeurs et multi-langues', 'Dashboard de suivi en temps réel', 'Modèle commercial et acquisition clients'] }
+      { name:'Fondations & communauté', weeks:'Sem. 1–2', color:'#c44bd8', tasks:['Finaliser l\'identité visuelle et le dégradé signature','Lancer le compte TikTok avec les 3 premiers contenus piliers','Mettre en ligne le Google Form d\'inscription intervenants','Recruter les membres clés de l\'équipe'] },
+      { name:'Programme & intervenants', weeks:'Sem. 3–4', color:'#7c6af7', tasks:['Sélectionner et confirmer les intervenants du festival','Définir le programme complet : thématiques, créneaux, formats','Créer les supports de communication pour chaque intervenant','Atteindre 500 abonnés TikTok'] },
+      { name:'Communication & promotion', weeks:'Sem. 5–6', color:'#3ecf8e', tasks:['Campagne TikTok intensive — contenu quotidien','Partage de l\'affiche FIMANI TEXTURES FESTIVAL','Activation des partenaires et affiliés','Atteindre 1 000 abonnés TikTok — live activé'] },
+      { name:'Festival & post-événement', weeks:'Sem. 7–8', color:'#f5a623', tasks:['Animation du festival virtuel en live','Collecte des replays pour l\'Académie','Bilan chiffré et retours participants','Lancement prévente édition 2027 payante'] }
     ],
     actions: [
-      { prio: 'now', label: 'Maintenant', name: 'Interviewer 3 vendeurs cette semaine', note: 'Comprendre concrètement le processus actuel de prise de commandes.' },
-      { prio: 'now', label: 'Maintenant', name: 'Créer un compte WhatsApp Business API', note: 'Passer par un BSP certifié Meta : Twilio, 360dialog ou Vonage.' },
-      { prio: 'now', label: 'Maintenant', name: 'Définir le cas d\'usage #1 ultra-précis', note: 'Ex: vendeur envoie "50 unités produit X" → agent confirme et crée la commande.' },
-      { prio: 'week', label: 'Cette semaine', name: 'Prototyper le flow en no-code', note: 'Utiliser n8n ou Make pour simuler le flow complet sans coder.' },
-      { prio: 'week', label: 'Cette semaine', name: 'Cartographier les systèmes à connecter', note: 'Excel, ERP, Google Sheets, logiciel de stock — vos points d\'intégration.' },
-      { prio: 'month', label: 'Ce mois', name: 'Recruter 3 vendeurs pilotes volontaires', note: 'Early adopters prêts à tester en échange d\'un accès gratuit.' }
+      { prio:'now', label:'Maintenant', name:'Finaliser et diffuser l\'affiche', note:'L\'affiche FIMANI TEXTURES FESTIVAL est prête — la partager sur tous les canaux.' },
+      { prio:'now', label:'Maintenant', name:'Activer le Google Form intervenants', note:'Le formulaire est prêt — le diffuser activement auprès des professionnels des cheveux texturés.' },
+      { prio:'now', label:'Maintenant', name:'Suivre les actions du 7 avril', note:'Actions définies lors de la réunion de lancement — vérifier l\'avancement de l\'équipe.' },
+      { prio:'week', label:'Cette semaine', name:'Publier 3 contenus TikTok piliers', note:'Hook fort, présentation de la mission, teaser festival — les 3 premiers posts fondateurs.' },
+      { prio:'month', label:'Ce mois', name:'Confirmer 5 intervenants', note:'Professionnels coiffure, créatrices de contenus, expertes soins — diversifier les profils.' }
     ],
     kpis: [
-      { name: 'Taux d\'automatisation', target: '> 80%' },
-      { name: 'Temps moyen par commande', target: '< 2 min' },
-      { name: 'Taux d\'erreur commandes', target: '< 3%' },
-      { name: 'Vendeurs pilotes actifs', target: '5' },
-      { name: 'NPS vendeurs', target: '> 40' },
-      { name: 'MRR objectif mois 4', target: '1 000 €' }
+      { name:'Abonnés TikTok', val:'1 000' },{ name:'Communauté engagée', val:'500+' },
+      { name:'Intervenants confirmés', val:'10' },{ name:'Inscrits festival', val:'200' },
+      { name:'Revenus affiliation', val:'500 €' },{ name:'NPS participants', val:'> 85%' }
+    ],
+    risques: [
+      { level:'high', title:'Ne pas atteindre 1 000 abonnés avant le festival', mit:'Publier quotidiennement dès maintenant, activer le réseau personnel pour les premiers abonnés.' },
+      { level:'high', title:'Peu d\'intervenants ou de faible qualité', mit:'Cibler des profils déjà actifs en ligne, proposer une visibilité en échange de participation.' },
+      { level:'med', title:'Manque d\'engagement de l\'équipe', mit:'Réunions hebdomadaires courtes, rôles très clairs, célébrer chaque milestone.' },
+      { level:'low', title:'Problèmes techniques le jour du live', mit:'Tester la plateforme en amont, avoir un plan B, prévoir un modérateur technique dédié.' }
     ]
-  }
+  },
+  2: { phases:[], actions:[{ prio:'now', label:'Maintenant', name:'Définir la vision du projet avec Claude', note:'Partagez votre idée en détail pour que je génère la fiche projet complète.' }], kpis:[], risques:[] },
+  3: { phases:[], actions:[{ prio:'now', label:'Maintenant', name:'Définir la vision du projet avec Claude', note:'Partagez votre idée en détail pour que je génère la fiche projet complète.' }], kpis:[], risques:[] },
+  4: { phases:[], actions:[{ prio:'now', label:'Maintenant', name:'Définir la vision du projet avec Claude', note:'Partagez votre idée en détail pour que je génère la fiche projet complète.' }], kpis:[], risques:[] }
 };
 
 let projects = [
-  { id: 1, title: 'Agent IA WhatsApp', type: 'startup', status: 'planning', desc: 'Automatiser les prises de commandes des vendeurs via un agent conversationnel.', progress: 0, actions: 6, date: 'Horizon: 16 sem.' },
-  { id: 2, title: 'Lancement appli mobile', type: 'startup', status: 'active', desc: 'MVP d\'une app de mise en relation entre artisans et particuliers.', progress: 45, actions: 3, date: 'Échéance: 30 juin' },
-  { id: 3, title: 'Refonte site e-commerce', type: 'client', status: 'planning', desc: 'Redesign complet UX/UI + migration vers Shopify.', progress: 15, actions: 7, date: 'Début: 20 avril' },
-  { id: 4, title: 'Podcast "Entreprendre"', type: 'perso', status: 'active', desc: 'Série de 10 épisodes autour des entrepreneurs du quotidien.', progress: 60, actions: 2, date: '6 / 10 épisodes' },
-  { id: 5, title: 'Formation en ligne', type: 'agence', status: 'hold', desc: 'Création d\'un cours en ligne sur la gestion de projet agile.', progress: 30, actions: 1, date: 'En pause' },
+  { id:1, title:'FIMANI — Textures Festival', type:'event', status:'active', desc:'Valoriser et célébrer les cheveux texturés. Communauté mondiale, festival virtuel, académie en ligne.', progress:35, actions:5, date:'Festival 2026' },
+  { id:2, title:'Agent IA WhatsApp', type:'startup', status:'planning', desc:'Automatiser les prises de commandes des vendeurs via un agent conversationnel IA.', progress:0, actions:6, date:'Horizon: 16 sem.' },
+  { id:3, title:'Tdoli', type:'startup', status:'planning', desc:'Projet à structurer — partagez votre vision pour générer la fiche complète.', progress:0, actions:1, date:'À définir' },
+  { id:4, title:'ERP BTP', type:'startup', status:'planning', desc:'ERP dédié aux entreprises du secteur BTP — à structurer avec Claude.', progress:0, actions:1, date:'À définir' }
 ];
 let currentFilter = 'all';
 let nextId = 10;
 
-function save() {
-  localStorage.setItem('hub_projects', JSON.stringify(projects));
-}
-function load() {
-  const saved = localStorage.getItem('hub_projects');
-  if (saved) projects = JSON.parse(saved);
-}
+function save() { try { localStorage.setItem('hub_v2', JSON.stringify(projects)); } catch(e){} }
+function load() { try { const s = localStorage.getItem('hub_v2'); if(s) projects = JSON.parse(s); } catch(e){} }
 
-function typeClass(t) { return 'b-' + t; }
-function statusClass(s) { return 's-' + s; }
-function statusLabel(s) { return { active: 'En cours', planning: 'Planification', hold: 'En pause', done: 'Terminé' }[s] || s; }
-function typeLabel(t) { return { startup: 'Startup', client: 'Client', perso: 'Perso', agence: 'Agence', associatif: 'Asso.', autre: 'Autre' }[t] || t; }
+function typeLabel(t) { return {startup:'Startup',event:'Événement',perso:'Perso',client:'Client',agence:'Agence',autre:'Autre'}[t]||t; }
+function statusLabel(s) { return {active:'En cours',planning:'Planification',hold:'En pause',done:'Terminé'}[s]||s; }
 
 function updateMetrics() {
-  const total = projects.length;
-  const active = projects.filter(p => p.status === 'active').length;
-  const actions = projects.reduce((a, p) => a + (p.actions || 0), 0);
-  const avg = total ? Math.round(projects.reduce((a, p) => a + p.progress, 0) / total) : 0;
-  document.getElementById('m-total').textContent = total;
-  document.getElementById('m-active').textContent = active;
-  document.getElementById('m-actions').textContent = actions;
-  document.getElementById('m-avg').textContent = avg + '%';
-  document.getElementById('nav-all').textContent = total;
-  document.getElementById('nav-active').textContent = active;
-  document.getElementById('nav-planning').textContent = projects.filter(p => p.status === 'planning').length;
-  document.getElementById('nav-hold').textContent = projects.filter(p => p.status === 'hold').length;
-  document.getElementById('nav-done').textContent = projects.filter(p => p.status === 'done').length;
+  const total=projects.length, active=projects.filter(p=>p.status==='active').length;
+  const actions=projects.reduce((a,p)=>a+(p.actions||0),0);
+  const avg=total?Math.round(projects.reduce((a,p)=>a+p.progress,0)/total):0;
+  document.getElementById('m-total').textContent=total;
+  document.getElementById('m-active').textContent=active;
+  document.getElementById('m-actions').textContent=actions;
+  document.getElementById('m-avg').textContent=avg+'%';
+  document.getElementById('nav-all').textContent=total;
+  document.getElementById('nav-active').textContent=active;
+  document.getElementById('nav-planning').textContent=projects.filter(p=>p.status==='planning').length;
+  document.getElementById('nav-hold').textContent=projects.filter(p=>p.status==='hold').length;
+  document.getElementById('nav-done').textContent=projects.filter(p=>p.status==='done').length;
 }
 
 function renderGrid() {
-  const filtered = currentFilter === 'all' ? projects : projects.filter(p => p.status === currentFilter || p.type === currentFilter);
+  const filtered = currentFilter==='all' ? projects : projects.filter(p=>p.status===currentFilter||p.type===currentFilter);
   const grid = document.getElementById('grid');
-  if (!filtered.length) {
-    grid.innerHTML = `<div style="grid-column:1/-1;text-align:center;padding:60px 20px;color:var(--text3);font-size:13px">Aucun projet dans cette catégorie.</div>`;
-    return;
-  }
-  grid.innerHTML = filtered.map((p, i) => {
-    const color = TYPE_COLORS[p.type] || '#9997a3';
+  if(!filtered.length){ grid.innerHTML=`<div style="grid-column:1/-1;text-align:center;padding:60px;color:var(--text3);font-size:13px">Aucun projet dans cette catégorie.</div>`; return; }
+  grid.innerHTML = filtered.map((p,i)=>{
+    const color=TYPE_COLORS[p.type]||'#9997a3';
     return `<div class="project-card" style="--card-color:${color};animation-delay:${i*0.05}s" onclick="openPanel(${p.id})">
       <div class="card-header">
         <div class="card-badges">
-          <span class="badge ${typeClass(p.type)}">${typeLabel(p.type)}</span>
-          <span class="badge ${statusClass(p.status)}">${statusLabel(p.status)}</span>
+          <span class="badge b-${p.type}">${typeLabel(p.type)}</span>
+          <span class="badge s-${p.status}">${statusLabel(p.status)}</span>
         </div>
-        <div class="card-menu">
-          <button class="icon-btn" title="Supprimer" onclick="event.stopPropagation();deleteProject(${p.id})">✕</button>
-        </div>
+        <div class="card-menu"><button class="icon-btn" onclick="event.stopPropagation();deleteProject(${p.id})">✕</button></div>
       </div>
       <div class="card-title">${p.title}</div>
       <div class="card-desc">${p.desc}</div>
@@ -536,78 +325,52 @@ function renderGrid() {
         <span class="progress-pct">${p.progress}%</span>
       </div>
       <div class="card-footer">
-        <span class="card-meta">${p.date || ''}</span>
-        ${p.actions ? `<span class="card-actions-btn">${p.actions} action${p.actions > 1 ? 's' : ''}</span>` : ''}
+        <span class="card-meta">${p.date||''}</span>
+        ${p.actions?`<span class="card-tag">${p.actions} action${p.actions>1?'s':''}</span>`:''}
       </div>
     </div>`;
-  }).join('') + `<div class="add-card" onclick="openModal()"><div class="add-icon-large">+</div><span>Nouveau projet</span></div>`;
+  }).join('') + `<div class="add-card" onclick="openModal()"><div style="font-size:24px;opacity:.4">+</div><span>Nouveau projet</span></div>`;
   updateMetrics();
 }
 
-function setFilter(f, el) {
-  currentFilter = f;
-  document.querySelectorAll('.nav-item, .filter-pill').forEach(b => b.classList.remove('active'));
-  if (el) el.classList.add('active');
+function setFilter(f,el) {
+  currentFilter=f;
+  document.querySelectorAll('.nav-item,.filter-pill').forEach(b=>b.classList.remove('active'));
+  if(el) el.classList.add('active');
   renderGrid();
 }
 
-function openModal() {
-  document.getElementById('modal').classList.add('open');
-  setTimeout(() => document.getElementById('f-title').focus(), 100);
-}
+function openModal() { document.getElementById('modal').classList.add('open'); setTimeout(()=>document.getElementById('f-title').focus(),100); }
 function closeModal() { document.getElementById('modal').classList.remove('open'); }
-document.getElementById('modal').addEventListener('click', e => { if (e.target === e.currentTarget) closeModal(); });
+document.getElementById('modal').addEventListener('click',e=>{if(e.target===e.currentTarget)closeModal();});
 
 function addProject() {
-  const title = document.getElementById('f-title').value.trim();
-  if (!title) { document.getElementById('f-title').focus(); return; }
-  const p = {
-    id: nextId++,
-    title,
-    desc: document.getElementById('f-desc').value.trim() || 'Projet à structurer.',
-    type: document.getElementById('f-type').value,
-    status: document.getElementById('f-status').value,
-    progress: parseInt(document.getElementById('f-progress').value) || 0,
-    actions: 0,
-    date: document.getElementById('f-date').value.trim() || 'Nouveau'
-  };
-  projects.unshift(p);
-  save();
-  closeModal();
-  document.getElementById('f-title').value = '';
-  document.getElementById('f-desc').value = '';
-  document.getElementById('f-progress').value = '0';
-  document.getElementById('f-date').value = '';
-  currentFilter = 'all';
+  const title=document.getElementById('f-title').value.trim();
+  if(!title){document.getElementById('f-title').focus();return;}
+  const p={id:nextId++,title,desc:document.getElementById('f-desc').value.trim()||'Projet à structurer.',type:document.getElementById('f-type').value,status:document.getElementById('f-status').value,progress:parseInt(document.getElementById('f-progress').value)||0,actions:1,date:document.getElementById('f-date').value.trim()||'Nouveau'};
+  PROJECT_DATA[p.id]={phases:[],actions:[{prio:'now',label:'Maintenant',name:'Structurer ce projet avec Claude',note:'Partagez votre vision pour générer la fiche complète.'}],kpis:[],risques:[]};
+  projects.unshift(p); save(); closeModal();
+  document.getElementById('f-title').value=''; document.getElementById('f-desc').value=''; document.getElementById('f-progress').value='0'; document.getElementById('f-date').value='';
+  currentFilter='all'; document.querySelectorAll('.nav-item,.filter-pill').forEach((b,i)=>b.classList.toggle('active',i===0));
   renderGrid();
 }
 
-function deleteProject(id) {
-  if (!confirm('Supprimer ce projet ?')) return;
-  projects = projects.filter(p => p.id !== id);
-  save();
-  closePanel();
-  renderGrid();
-}
+function deleteProject(id) { if(!confirm('Supprimer ce projet ?'))return; projects=projects.filter(p=>p.id!==id); save(); closePanel(); renderGrid(); }
 
 function openPanel(id) {
-  const p = projects.find(x => x.id === id);
-  if (!p) return;
-  const data = PROJECT_DATA[id];
-  const color = TYPE_COLORS[p.type] || '#9997a3';
-  let html = `
-    <div style="display:flex;align-items:center;gap:12px;margin-bottom:4px">
-      <div style="width:36px;height:36px;border-radius:10px;background:${color}22;display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:500;color:${color}">
-        ${p.title.charAt(0)}
-      </div>
-      <div>
-        <div style="font-size:16px;font-weight:500;color:var(--text);letter-spacing:-.02em">${p.title}</div>
-        <div style="font-size:12px;color:var(--text3);margin-top:1px">${p.desc}</div>
-      </div>
+  const p=projects.find(x=>x.id===id); if(!p)return;
+  const data=PROJECT_DATA[id]||{phases:[],actions:[],kpis:[],risques:[]};
+  const color=TYPE_COLORS[p.type]||'#9997a3';
+  const isEmpty=!data.phases||data.phases.length===0;
+
+  let html=`
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:6px">
+      <div style="width:40px;height:40px;border-radius:10px;background:${color}22;display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:500;color:${color};flex-shrink:0">${p.title.charAt(0)}</div>
+      <div><div style="font-size:16px;font-weight:500;letter-spacing:-.02em">${p.title}</div><div style="font-size:12px;color:var(--text3);margin-top:2px">${p.desc}</div></div>
     </div>
     <div style="display:flex;gap:5px;margin:10px 0">
-      <span class="badge ${typeClass(p.type)}">${typeLabel(p.type)}</span>
-      <span class="badge ${statusClass(p.status)}">${statusLabel(p.status)}</span>
+      <span class="badge b-${p.type}">${typeLabel(p.type)}</span>
+      <span class="badge s-${p.status}">${statusLabel(p.status)}</span>
     </div>
     <div style="margin:12px 0">
       <div style="display:flex;justify-content:space-between;margin-bottom:5px">
@@ -617,69 +380,62 @@ function openPanel(id) {
       <div class="progress-bar" style="height:4px"><div class="progress-fill" style="width:${p.progress}%;background:${color}"></div></div>
     </div>
     <div class="panel-tabs">
-      <button class="panel-tab active" onclick="switchTab('roadmap',this)">Roadmap</button>
+      ${data.vision?'<button class="panel-tab active" onclick="switchTab(\'vision\',this)">Vision</button>':''}
+      <button class="panel-tab ${!data.vision?'active':''}" onclick="switchTab('roadmap',this)">Roadmap</button>
       <button class="panel-tab" onclick="switchTab('actions',this)">Actions</button>
       <button class="panel-tab" onclick="switchTab('kpis',this)">KPIs</button>
+      <button class="panel-tab" onclick="switchTab('risques',this)">Risques</button>
     </div>`;
 
-  if (data) {
-    html += `<div id="tab-roadmap" class="panel-section active">`;
-    data.phases.forEach(ph => {
-      html += `<div class="phase-item">
-        <div class="phase-header-row">
-          <div class="phase-dot" style="background:${ph.color}"></div>
-          <div class="phase-name">${ph.name}</div>
-          <div class="phase-weeks">${ph.weeks}</div>
-        </div>
-        <div class="phase-tasks-list">${ph.tasks.map(t => `<div class="phase-task">${t}</div>`).join('')}</div>
-      </div>`;
-    });
-    html += `</div>`;
-    html += `<div id="tab-actions" class="panel-section">`;
-    data.actions.forEach(a => {
-      html += `<div class="action-item">
-        <span class="prio-tag p-${a.prio}">${a.label}</span>
-        <div><div class="action-name">${a.name}</div><div class="action-note">${a.note}</div></div>
-      </div>`;
-    });
-    html += `</div>`;
-    html += `<div id="tab-kpis" class="panel-section">`;
-    data.kpis.forEach(k => {
-      html += `<div class="kpi-item"><div class="kpi-name-txt">${k.name}</div><div class="kpi-target-txt">${k.target}</div></div>`;
-    });
-    html += `</div>`;
-  } else {
-    html += `<div id="tab-roadmap" class="panel-section active"><div class="empty-panel">Fiche détaillée non encore générée.<br>Travaillez sur ce projet avec Claude pour la compléter.</div></div>
-    <div id="tab-actions" class="panel-section"></div>
-    <div id="tab-kpis" class="panel-section"></div>`;
+  if(data.vision) {
+    html+=`<div id="tab-vision" class="panel-section active">
+      <div class="vision-block"><div class="vision-block-title">Court terme — 2026</div>${data.vision.court.map(v=>`<div class="vision-item">${v}</div>`).join('')}</div>
+      <div class="vision-block"><div class="vision-block-title">Long terme — 2027-2028</div>${data.vision.long.map(v=>`<div class="vision-item">${v}</div>`).join('')}</div>
+    </div>`;
   }
 
-  document.getElementById('panel-content').innerHTML = html;
+  html+=`<div id="tab-roadmap" class="panel-section ${!data.vision?'active':''}">`;
+  if(isEmpty){ html+=`<div class="empty-panel">Fiche non encore générée.<br>Cliquez sur le bouton ci-dessous pour que Claude structure ce projet.</div>`; }
+  else { data.phases.forEach(ph=>{ html+=`<div class="phase-item"><div class="phase-hrow"><div class="phase-dot" style="background:${ph.color}"></div><div class="phase-name">${ph.name}</div><div class="phase-weeks">${ph.weeks}</div></div><div class="phase-tasks">${ph.tasks.map(t=>`<div class="phase-task">${t}</div>`).join('')}</div></div>`; }); }
+  html+=`</div>`;
+
+  html+=`<div id="tab-actions" class="panel-section">`;
+  if(data.actions&&data.actions.length){ data.actions.forEach(a=>{ html+=`<div class="action-item"><span class="prio-tag p-${a.prio}">${a.label}</span><div><div class="action-name">${a.name}</div><div class="action-note">${a.note}</div></div></div>`; }); }
+  html+=`</div>`;
+
+  html+=`<div id="tab-kpis" class="panel-section">`;
+  if(data.kpis&&data.kpis.length){ data.kpis.forEach(k=>{ html+=`<div class="kpi-item"><div class="kpi-name-t">${k.name}</div><div class="kpi-val">${k.val}</div></div>`; }); }
+  else { html+=`<div class="empty-panel">KPIs à définir avec Claude.</div>`; }
+  html+=`</div>`;
+
+  html+=`<div id="tab-risques" class="panel-section">`;
+  if(data.risques&&data.risques.length){ data.risques.forEach(r=>{ html+=`<div class="risk-item"><div class="risk-hrow"><span class="rlevel r-${r.level}">${{high:'Critique',med:'Moyen',low:'Faible'}[r.level]}</span><div class="risk-title">${r.title}</div></div><div class="risk-mit">${r.mit}</div></div>`; }); }
+  else { html+=`<div class="empty-panel">Risques à analyser avec Claude.</div>`; }
+  html+=`</div>`;
+
+  html+=`<div class="panel-cta">
+    <button class="panel-btn panel-btn-primary" onclick="window.open('https://claude.ai','_blank')">Ouvrir dans Claude ↗</button>
+  </div>`;
+
+  document.getElementById('panel-content').innerHTML=html;
   document.getElementById('detail-panel').classList.add('open');
 }
 
 function closePanel() { document.getElementById('detail-panel').classList.remove('open'); }
-
-function switchTab(id, el) {
-  document.querySelectorAll('.panel-section').forEach(s => s.classList.remove('active'));
-  document.querySelectorAll('.panel-tab').forEach(t => t.classList.remove('active'));
-  const el2 = document.getElementById('tab-' + id);
-  if (el2) el2.classList.add('active');
+function switchTab(id,el) {
+  document.querySelectorAll('.panel-section').forEach(s=>s.classList.remove('active'));
+  document.querySelectorAll('.panel-tab').forEach(t=>t.classList.remove('active'));
+  const s=document.getElementById('tab-'+id); if(s) s.classList.add('active');
   el.classList.add('active');
 }
 
 function exportData() {
-  const blob = new Blob([JSON.stringify(projects, null, 2)], { type: 'application/json' });
-  const a = document.createElement('a');
-  a.href = URL.createObjectURL(blob);
-  a.download = 'hub-projets.json';
-  a.click();
+  const blob=new Blob([JSON.stringify(projects,null,2)],{type:'application/json'});
+  const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='hub-projets.json'; a.click();
 }
 
-document.getElementById('current-date').textContent = new Date().toLocaleDateString('fr-FR', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
-
-load();
-renderGrid();
+document.getElementById('current-date').textContent=new Date().toLocaleDateString('fr-FR',{weekday:'long',year:'numeric',month:'long',day:'numeric'});
+load(); renderGrid();
 </script>
 </body>
 </html>
