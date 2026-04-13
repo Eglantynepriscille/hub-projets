@@ -537,7 +537,7 @@ function openPanel(id) {
   html+=`</div>`;
 
   html+=`<div class="panel-cta">
-    <button class="panel-btn panel-btn-primary" onclick="window.open('https://claude.ai','_blank')">Ouvrir dans Claude ↗</button>
+    <button class="panel-btn panel-btn-primary" onclick="copyToClaudeCode(${p.id})">Copier contexte pour Claude Code ↗</button>
   </div>`;
 
   document.getElementById('panel-content').innerHTML=html;
@@ -558,6 +558,28 @@ function exportData() {
 }
 
 document.getElementById('current-date').textContent=new Date().toLocaleDateString('fr-FR',{weekday:'long',year:'numeric',month:'long',day:'numeric'});
+function copyToClaudeCode(id) {
+  const p = projects.find(x => x.id === id);
+  const data = PROJECT_DATA[id] || {};
+  const ctx = [
+    'Projet : ' + p.title,
+    'Type : ' + p.type + ' | Statut : ' + p.status + ' | Avancement : ' + p.progress + '%',
+    'Description : ' + p.desc,
+    'Échéance : ' + (p.date || 'non définie'),
+    data.phases && data.phases.length ? 'Phases : ' + data.phases.map(ph => ph.name + ' (' + ph.weeks + ')').join(', ') : '',
+    data.actions && data.actions.length ? 'Actions prioritaires : ' + data.actions.map(a => '[' + a.label + '] ' + a.name).join(' | ') : '',
+    data.kpis && data.kpis.length ? 'KPIs : ' + data.kpis.map(k => k.name + ' → ' + k.val).join(', ') : '',
+    '',
+    'Je veux que tu m\'aides à mettre à jour ce projet dans index.html.'
+  ].filter(Boolean).join('\n');
+  navigator.clipboard.writeText(ctx).then(() => {
+    const btn = event.target;
+    btn.textContent = '✓ Copié — colle dans Claude Code';
+    btn.style.background = '#3ecf8e';
+    setTimeout(() => { btn.textContent = 'Copier contexte pour Claude Code ↗'; btn.style.background = ''; }, 3000);
+  });
+}
+
 load(); renderGrid();
 </script>
 </body>
