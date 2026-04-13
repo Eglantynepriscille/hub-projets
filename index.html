@@ -510,6 +510,7 @@ function openPanel(id) {
       <button class="panel-tab" onclick="switchTab('actions',this)">Actions</button>
       <button class="panel-tab" onclick="switchTab('kpis',this)">KPIs</button>
       <button class="panel-tab" onclick="switchTab('risques',this)">Risques</button>
+      <button class="panel-tab" onclick="switchTab('claude',this)">✦ Claude</button>
     </div>`;
 
   if(data.vision) {
@@ -538,6 +539,14 @@ function openPanel(id) {
   else { html+=`<div class="empty-panel">Risques à analyser avec Claude.</div>`; }
   html+=`</div>`;
 
+  html+=`<div id="tab-claude" class="panel-section">
+    <div id="chat-messages-${p.id}" style="min-height:80px;max-height:300px;overflow-y:auto;margin-bottom:12px;display:flex;flex-direction:column;gap:10px"></div>
+    <div style="display:flex;gap:8px;align-items:flex-end">
+      <textarea id="chat-input-${p.id}" class="form-input" rows="2" placeholder="Demande quelque chose sur ce projet..." style="resize:none;flex:1"></textarea>
+      <button class="btn btn-primary" onclick="askClaude(${p.id})" style="flex-shrink:0;height:58px;padding:0 16px">Envoyer</button>
+    </div>
+  </div>`;
+
   html+=`<div class="panel-cta">
     <button class="panel-btn panel-btn-primary" onclick="copyToClaudeCode(${p.id})">Copier contexte pour Claude Code ↗</button>
   </div>`;
@@ -560,6 +569,45 @@ function exportData() {
 }
 
 document.getElementById('current-date').textContent=new Date().toLocaleDateString('fr-FR',{weekday:'long',year:'numeric',month:'long',day:'numeric'});
+const chatHistories = {};
+
+async function askClaude(id) {
+  const input = document.getElementById('chat-input-' + id);
+  const box = document.getElementById('chat-messages-' + id);
+  const text = input.value.trim();
+  if (!text) return;
+
+  if (!chatHistories[id]) chatHistories[id] = [];
+  chatHistories[id].push({ role: 'user', content: text });
+
+  box.innerHTML += `<div style="background:var(--surface3);padding:8px 12px;border-radius:8px;font-size:12px;color:var(--text);align-self:flex-end;max-width:85%">${text}</div>`;
+  input.value = '';
+  box.innerHTML += `<div id="typing-${id}" style="font-size:12px;color:var(--text3);padding:4px 0">Claude réfléchit...</div>`;
+  box.scrollTop = box.scrollHeight;
+
+  const p = projects.find(x => x.id === id);
+  const data = PROJECT_DATA[id] || {};
+  const projectContext = `Projet: ${p.title} | Type: ${p.type} | Statut: ${p.status} | Avancement: ${p.progress}% | Description: ${p.desc}`;
+
+  try {
+    const res = await fetch('/api/chat', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ messages: chatHistories[id], projectContext })
+    });
+    const result = await res.json();
+    const reply = result.content?.[0]?.text || 'Pas de réponse.';
+    chatHistories[id].push({ role: 'assistant', content: reply });
+
+    document.getElementById('typing-' + id)?.remove();
+    box.innerHTML += `<div style="background:rgba(124,106,247,.1);border:1px solid rgba(124,106,247,.2);padding:8px 12px;border-radius:8px;font-size:12px;color:var(--text);align-self:flex-start;max-width:95%;white-space:pre-wrap">${reply}</div>`;
+    box.scrollTop = box.scrollHeight;
+  } catch(e) {
+    document.getElementById('typing-' + id)?.remove();
+    box.innerHTML += `<div style="font-size:12px;color:var(--red);padding:4px 0">Erreur de connexion à l\'API.</div>`;
+  }
+}
+
 function copyToClaudeCode(id) {
   const p = projects.find(x => x.id === id);
   const data = PROJECT_DATA[id] || {};
