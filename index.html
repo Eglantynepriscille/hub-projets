@@ -708,9 +708,12 @@ async function sendChat() {
   }
 }
 
-document.getElementById('chat-input').addEventListener('keydown', function(e) {
-  if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendChat(); }
-});
+const chatInputEl = document.getElementById('chat-input');
+if (chatInputEl) {
+  chatInputEl.addEventListener('keydown', function(e) {
+    if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendChat(); }
+  });
+}
 
 projects = [
   { id:1, title:'FIMANI — Textures Festival', type:'event', status:'active', desc:'Valoriser et célébrer les cheveux texturés. Communauté mondiale, festival virtuel, académie en ligne.', progress:35, actions:5, date:'Festival 2026' },
