@@ -412,17 +412,26 @@ const PROJECT_DATA = {
   4: { phases:[], actions:[{ prio:'now', label:'Maintenant', name:'Définir la vision du projet avec Claude', note:'Partagez votre idée en détail pour que je génère la fiche projet complète.' }], kpis:[], risques:[] }
 };
 
-let projects = [
+const DEFAULT_PROJECTS = [
   { id:1, title:'FIMANI — Textures Festival', type:'event', status:'planning', desc:'Valoriser et célébrer les cheveux texturés. Communauté mondiale, festival virtuel, académie en ligne.', progress:35, actions:5, date:'Festival 2026' },
   { id:2, title:'Agent IA WhatsApp', type:'startup', status:'planning', desc:'Automatiser les prises de commandes des vendeurs via un agent conversationnel IA.', progress:0, actions:6, date:'Horizon: 16 sem.', sheet:'https://docs.google.com/spreadsheets/d/10kg4uUJK1QCtQTCGB7MeEs_7HbkT7iFRgHkUxMaQJrA/edit?gid=0#gid=0' },
   { id:3, title:'Tdoli', type:'startup', status:'planning', desc:'Projet à structurer — partagez votre vision pour générer la fiche complète.', progress:0, actions:1, date:'À définir' },
   { id:4, title:'ERP BTP', type:'startup', status:'planning', desc:'ERP dédié aux entreprises du secteur BTP — à structurer avec Claude.', progress:0, actions:1, date:'À définir' }
 ];
+let projects = [...DEFAULT_PROJECTS];
 let currentFilter = 'all';
 let nextId = 10;
 
 function save() { try { localStorage.setItem('hub_v2', JSON.stringify(projects)); } catch(e){} }
-function load() { try { const s = localStorage.getItem('hub_v2'); if(s) projects = JSON.parse(s); } catch(e){} }
+function load() {
+  try {
+    const s = localStorage.getItem('hub_v2');
+    if (s) projects = JSON.parse(s);
+    else projects = [...DEFAULT_PROJECTS];
+  } catch(e) {
+    projects = [...DEFAULT_PROJECTS];
+  }
+}
 
 function typeLabel(t) { return {startup:'Startup',event:'Événement',perso:'Perso',client:'Client',agence:'Agence',autre:'Autre'}[t]||t; }
 function statusLabel(s) { return {active:'En cours',planning:'Planification',hold:'En pause',done:'Terminé'}[s]||s; }
