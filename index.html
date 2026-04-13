@@ -269,7 +269,130 @@ const PROJECT_DATA = {
       { level:'low', title:'Problèmes techniques le jour du live', mit:'Tester la plateforme en amont, avoir un plan B, prévoir un modérateur technique dédié.' }
     ]
   },
-  2: { phases:[], actions:[{ prio:'now', label:'Maintenant', name:'Définir la vision du projet avec Claude', note:'Partagez votre idée en détail pour que je génère la fiche projet complète.' }], kpis:[], risques:[] },
+  2: {
+  vision: {
+    court: [
+      'Construire et tester un agent IA qui reçoit, comprend et confirme les commandes via WhatsApp',
+      'Tester sur ton propre cas ou avec 3 commerçants pilotes (gratuit)',
+      'Valider que l\'agent réduit le temps de traitement des commandes de 80%',
+      'Générer les 100 premiers euros de revenus via les premiers abonnements'
+    ],
+    long: [
+      'SaaS multi-canaux : WhatsApp, Instagram, Messenger, TikTok Shop',
+      'Tableau de bord commerçant : historique commandes, stats, gestion catalogue',
+      'Intégration paiement : Mobile Money, Stripe, PayPal',
+      '100 commerçants abonnés — 3 000 €/mois de MRR'
+    ]
+  },
+  phases: [
+    {
+      name: 'Comprendre & choisir la stack',
+      weeks: 'Sem. 1–2',
+      color: '#7c6af7',
+      tasks: [
+        'Tester Make / n8n pour l\'automatisation des messages WhatsApp',
+        'Comprendre l\'API WhatsApp Business (Meta) — compte gratuit',
+        'Choisir le modèle IA : GPT-4o ou Claude via API',
+        'Définir le flux : message reçu → IA → réponse → confirmation'
+      ]
+    },
+    {
+      name: 'Prototype fonctionnel',
+      weeks: 'Sem. 3–5',
+      color: '#3ecf8e',
+      tasks: [
+        'Construire le premier flux : réception commande → parsing IA → confirmation',
+        'Gérer les cas courants : "je veux 2 robes taille M", "c\'est combien ?"',
+        'Tester en conditions réelles avec un commerçant pilote',
+        'Corriger les erreurs de compréhension de l\'agent'
+      ]
+    },
+    {
+      name: 'Validation & premiers clients',
+      weeks: 'Sem. 6–10',
+      color: '#f5a623',
+      tasks: [
+        'Recruter 3 commerçants pilotes (gratuit contre feedback)',
+        'Intégrer Instagram Direct en plus de WhatsApp',
+        'Créer un tableau de bord simple : liste des commandes reçues',
+        'Définir les plans tarifaires : Starter / Pro / Business'
+      ]
+    },
+    {
+      name: 'Lancement SaaS',
+      weeks: 'Sem. 11–16',
+      color: '#e879a0',
+      tasks: [
+        'Landing page + onboarding en self-service',
+        'Système de facturation : Stripe ou LemonSqueezy',
+        'Atteindre 10 commerçants payants',
+        'Lancer la communication sur LinkedIn et TikTok'
+      ]
+    }
+  ],
+  actions: [
+    {
+      prio: 'now',
+      label: 'Maintenant',
+      name: 'Créer un compte WhatsApp Business API (Meta)',
+      note: 'Aller sur developers.facebook.com — gratuit pour commencer. C\'est la porte d\'entrée obligatoire.'
+    },
+    {
+      prio: 'now',
+      label: 'Maintenant',
+      name: 'Tester Make.com avec un scénario WhatsApp simple',
+      note: 'Make a un plan gratuit. Objectif : recevoir un message et envoyer une réponse automatique sans coder.'
+    },
+    {
+      prio: 'now',
+      label: 'Maintenant',
+      name: 'Identifier 3 commerçants pilotes dans ton réseau',
+      note: 'Vendeurs de vêtements, food, cosmétiques... Quelqu\'un qui prend déjà des commandes sur WhatsApp/Insta.'
+    },
+    {
+      prio: 'week',
+      label: 'Cette semaine',
+      name: 'Définir le catalogue produit type du pilote',
+      note: 'Pour que l\'IA comprenne les commandes, créer un Google Sheet simple : nom, prix, tailles disponibles.'
+    },
+    {
+      prio: 'month',
+      label: 'Ce mois',
+      name: 'Construire le premier flux complet de bout en bout',
+      note: 'Message WhatsApp → Make → IA → parsing commande → confirmation automatique → ajout Google Sheet.'
+    }
+  ],
+  kpis: [
+    { name: 'Commerçants pilotes', val: '3' },
+    { name: 'Réduction temps traitement', val: '80%' },
+    { name: 'Taux de compréhension IA', val: '95%' },
+    { name: 'Clients payants (J+120)', val: '10' },
+    { name: 'Prix plan Starter/mois', val: '29 €' },
+    { name: 'MRR cible J+120', val: '300 €' }
+  ],
+  risques: [
+    {
+      level: 'high',
+      title: 'API WhatsApp Business complexe à configurer',
+      mit: 'Utiliser Make.com ou Twilio qui abstraient l\'API Meta — pas besoin de coder directement avec Meta.'
+    },
+    {
+      level: 'high',
+      title: 'L\'IA mal comprend les commandes en langage naturel',
+      mit: 'Entraîner avec de vrais exemples de messages. Prévoir un fallback humain quand l\'IA n\'est pas sûre.'
+    },
+    {
+      level: 'med',
+      title: 'Commerçants résistants à changer leurs habitudes',
+      mit: 'Montrer un avant/après concret : "avant 2h/jour à répondre, maintenant 10 min". Onboarding accompagné.'
+    },
+    {
+      level: 'low',
+      title: 'Coûts API IA trop élevés au scale',
+      mit: 'Calculer le coût par commande dès le début et l\'intégrer dans la tarification SaaS.'
+    }
+  ]
+},
   3: { phases:[], actions:[{ prio:'now', label:'Maintenant', name:'Définir la vision du projet avec Claude', note:'Partagez votre idée en détail pour que je génère la fiche projet complète.' }], kpis:[], risques:[] },
   4: { phases:[], actions:[{ prio:'now', label:'Maintenant', name:'Définir la vision du projet avec Claude', note:'Partagez votre idée en détail pour que je génère la fiche projet complète.' }], kpis:[], risques:[] }
 };
