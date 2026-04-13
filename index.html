@@ -251,6 +251,9 @@
 </div>
 
 <script>
+window.onerror = function(msg, src, line) {
+  document.body.innerHTML = '<div style="color:red;padding:20px;font-size:14px">ERREUR ligne ' + line + ': ' + msg + '</div>' + document.body.innerHTML;
+};
 const TYPE_COLORS = { startup:'#7c6af7', event:'#c44bd8', perso:'#e879a0', client:'#3ecf8e', agence:'#f5a623', autre:'#9997a3' };
 
 const PROJECT_DATA = {
