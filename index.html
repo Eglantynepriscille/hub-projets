@@ -286,41 +286,41 @@ const PROJECT_DATA = {
   },
   phases: [
     {
-      name: 'Comprendre & choisir la stack',
-      weeks: 'Sem. 1–2',
+      name: 'Setup comptes & outils',
+      weeks: 'Sem. 1',
       color: '#7c6af7',
       tasks: [
-        'Tester Make / n8n pour l\'automatisation des messages WhatsApp',
-        'Comprendre l\'API WhatsApp Business (Meta) — compte gratuit',
-        'Choisir le modèle IA : GPT-4o ou Claude via API',
-        'Définir le flux : message reçu → IA → réponse → confirmation'
+        'Créer compte Make.com (plan gratuit)',
+        'Créer app Meta sur developers.facebook.com → activer WhatsApp',
+        'Récupérer clé API Claude sur console.anthropic.com',
+        'Créer le Google Sheet commandes : Date, Téléphone, Produit, Quantité, Taille, Couleur'
       ]
     },
     {
-      name: 'Prototype fonctionnel',
-      weeks: 'Sem. 3–5',
+      name: 'Prototype Make.com + Claude',
+      weeks: 'Sem. 2–3',
       color: '#3ecf8e',
       tasks: [
-        'Construire le premier flux : réception commande → parsing IA → confirmation',
-        'Gérer les cas courants : "je veux 2 robes taille M", "c\'est combien ?"',
-        'Tester en conditions réelles avec un commerçant pilote',
-        'Corriger les erreurs de compréhension de l\'agent'
+        'Configurer le webhook WhatsApp dans Make',
+        'Connecter Claude Haiku via HTTP — prompt de parsing commandes',
+        'Ajouter Iterator + Google Sheets pour enregistrer chaque produit',
+        'Envoyer la confirmation automatique au client via WhatsApp Cloud API'
       ]
     },
     {
-      name: 'Validation & premiers clients',
-      weeks: 'Sem. 6–10',
+      name: 'Validation avec pilotes',
+      weeks: 'Sem. 4–8',
       color: '#f5a623',
       tasks: [
         'Recruter 3 commerçants pilotes (gratuit contre feedback)',
-        'Intégrer Instagram Direct en plus de WhatsApp',
-        'Créer un tableau de bord simple : liste des commandes reçues',
-        'Définir les plans tarifaires : Starter / Pro / Business'
+        'Tester avec de vrais messages — corriger les erreurs de parsing',
+        'Ajouter Instagram Direct si demandé par les pilotes',
+        'Définir les plans tarifaires : Starter 29€ / Pro / Business'
       ]
     },
     {
       name: 'Lancement SaaS',
-      weeks: 'Sem. 11–16',
+      weeks: 'Sem. 9–16',
       color: '#e879a0',
       tasks: [
         'Landing page + onboarding en self-service',
@@ -334,32 +334,32 @@ const PROJECT_DATA = {
     {
       prio: 'now',
       label: 'Maintenant',
-      name: 'Créer un compte WhatsApp Business API (Meta)',
-      note: 'Aller sur developers.facebook.com — gratuit pour commencer. C\'est la porte d\'entrée obligatoire.'
+      name: 'Créer les 4 comptes nécessaires',
+      note: 'make.com + developers.facebook.com + console.anthropic.com + Google Sheets. Tout est gratuit pour démarrer.'
     },
     {
       prio: 'now',
       label: 'Maintenant',
-      name: 'Tester Make.com avec un scénario WhatsApp simple',
-      note: 'Make a un plan gratuit. Objectif : recevoir un message et envoyer une réponse automatique sans coder.'
+      name: 'Configurer le webhook WhatsApp dans Make',
+      note: 'Module Webhooks > Custom Webhook → copier l\'URL → la coller dans Meta Dashboard > WhatsApp > Configuration.'
     },
     {
       prio: 'now',
       label: 'Maintenant',
-      name: 'Identifier 3 commerçants pilotes dans ton réseau',
-      note: 'Vendeurs de vêtements, food, cosmétiques... Quelqu\'un qui prend déjà des commandes sur WhatsApp/Insta.'
+      name: 'Brancher Claude Haiku sur Make via HTTP',
+      note: 'POST https://api.anthropic.com/v1/messages — modèle : claude-haiku-4-5-20251001. Le prompt de parsing est prêt.'
     },
     {
       prio: 'week',
       label: 'Cette semaine',
-      name: 'Définir le catalogue produit type du pilote',
-      note: 'Pour que l\'IA comprenne les commandes, créer un Google Sheet simple : nom, prix, tailles disponibles.'
+      name: 'Tester le flux complet avec un vrai message',
+      note: 'Envoie "je veux 2 robes taille M" → vérifier la ligne dans Google Sheets + confirmation reçue sur WhatsApp.'
     },
     {
       prio: 'month',
       label: 'Ce mois',
-      name: 'Construire le premier flux complet de bout en bout',
-      note: 'Message WhatsApp → Make → IA → parsing commande → confirmation automatique → ajout Google Sheet.'
+      name: 'Recruter 3 commerçants pilotes',
+      note: 'Vendeurs de vêtements, food, cosmétiques qui prennent déjà des commandes sur WhatsApp/Insta. Gratuit contre feedback.'
     }
   ],
   kpis: [
