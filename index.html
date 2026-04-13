@@ -144,6 +144,21 @@
   .vision-block-title { font-size: 12px; font-weight: 500; color: var(--text3); text-transform: uppercase; letter-spacing: .06em; margin-bottom: 6px; }
   @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
   @media (max-width: 768px) { .sidebar { width: 60px; } .sidebar .logo-text, .sidebar .logo-sub, .nav-label, .nav-item span, .nav-count, .sidebar-footer .add-project-btn { display: none; } .main { margin-left: 60px; padding: 20px; } .metrics-grid { grid-template-columns: repeat(2,1fr); } .detail-panel { width: 100%; } }
+  .chat-panel { position: fixed; bottom: 24px; right: 24px; width: 380px; background: var(--surface); border: 1px solid var(--border2); border-radius: var(--radius); box-shadow: 0 8px 32px rgba(0,0,0,.4); z-index: 200; display: none; flex-direction: column; max-height: 500px; }
+  .chat-panel.open { display: flex; }
+  .chat-header { padding: 14px 16px; border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; }
+  .chat-header-title { font-size: 13px; font-weight: 500; color: var(--text); }
+  .chat-messages { flex: 1; overflow-y: auto; padding: 14px; display: flex; flex-direction: column; gap: 10px; min-height: 200px; }
+  .chat-msg { max-width: 85%; padding: 8px 12px; border-radius: 10px; font-size: 13px; line-height: 1.5; }
+  .chat-msg.user { background: var(--accent); color: #fff; align-self: flex-end; border-bottom-right-radius: 3px; }
+  .chat-msg.ai { background: var(--surface2); color: var(--text); align-self: flex-start; border-bottom-left-radius: 3px; }
+  .chat-msg.loading { color: var(--text3); font-style: italic; }
+  .chat-input-row { padding: 12px; border-top: 1px solid var(--border); display: flex; gap: 8px; }
+  .chat-input { flex: 1; padding: 8px 12px; border: 1px solid var(--border); border-radius: var(--radius-sm); font-size: 13px; background: var(--surface2); color: var(--text); font-family: 'DM Sans', sans-serif; resize: none; }
+  .chat-input:focus { outline: none; border-color: var(--accent); }
+  .chat-send { padding: 8px 14px; background: var(--accent); color: #fff; border: none; border-radius: var(--radius-sm); font-size: 13px; cursor: pointer; font-family: 'DM Sans', sans-serif; }
+  .chat-send:hover { opacity: .85; }
+  .chat-toggle { position: fixed; bottom: 24px; right: 24px; width: 48px; height: 48px; background: var(--accent); border: none; border-radius: 50%; color: #fff; font-size: 22px; cursor: pointer; z-index: 199; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 16px rgba(124,106,247,.4); }
 </style>
 </head>
 <body>
@@ -630,7 +645,75 @@ function copyToClaudeCode(id) {
   });
 }
 
+let currentProjectId = null;
+let chatHistory = [];
+
+function toggleChat() {
+  const panel = document.getElementById('chat-panel');
+  const toggle = document.getElementById('chat-toggle');
+  panel.classList.toggle('open');
+  toggle.style.display = panel.classList.contains('open') ? 'none' : 'flex';
+  if (panel.classList.contains('open') && chatHistory.length === 0) {
+    addMessage('ai', 'Bonjour ! Sélectionne un projet et je t\'aide à le structurer, mettre à jour ou analyser. 🚀');
+  }
+}
+
+function addMessage(role, text) {
+  const msgs = document.getElementById('chat-messages');
+  const div = document.createElement('div');
+  div.className = 'chat-msg ' + role;
+  div.textContent = text;
+  msgs.appendChild(div);
+  msgs.scrollTop = msgs.scrollHeight;
+  return div;
+}
+
+async function sendChat() {
+  const input = document.getElementById('chat-input');
+  const text = input.value.trim();
+  if (!text) return;
+  input.value = '';
+  addMessage('user', text);
+  chatHistory.push({ role: 'user', content: text });
+  const loading = addMessage('ai', 'En train de réfléchir...');
+  loading.classList.add('loading');
+  const p = currentProjectId ? projects.find(x => x.id === currentProjectId) : null;
+  const context = p ? 'Projet : ' + p.title + ' | Statut : ' + p.status + ' | Avancement : ' + p.progress + '% | Description : ' + p.desc : 'Aucun projet sélectionné.';
+  try {
+    const res = await fetch('/api/chat', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ messages: chatHistory, projectContext: context })
+    });
+    const data = await res.json();
+    const reply = data.content[0].text;
+    loading.remove();
+    addMessage('ai', reply);
+    chatHistory.push({ role: 'assistant', content: reply });
+  } catch(e) {
+    loading.textContent = 'Erreur — réessaie dans un instant.';
+    loading.classList.remove('loading');
+  }
+}
+
+document.getElementById('chat-input').addEventListener('keydown', function(e) {
+  if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendChat(); }
+});
+
 load(); renderGrid();
 </script>
+
+<button class="chat-toggle" id="chat-toggle" onclick="toggleChat()">✦</button>
+<div class="chat-panel" id="chat-panel">
+  <div class="chat-header">
+    <div class="chat-header-title" id="chat-title">Assistant IA</div>
+    <button class="icon-btn" onclick="toggleChat()">✕</button>
+  </div>
+  <div class="chat-messages" id="chat-messages"></div>
+  <div class="chat-input-row">
+    <textarea class="chat-input" id="chat-input" rows="1" placeholder="Pose une question sur ce projet..."></textarea>
+    <button class="chat-send" onclick="sendChat()">→</button>
+  </div>
+</div>
 </body>
 </html>
