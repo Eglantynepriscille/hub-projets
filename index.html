@@ -596,7 +596,7 @@ async function askClaude(id) {
       body: JSON.stringify({ messages: chatHistories[id], projectContext })
     });
     const result = await res.json();
-    const reply = result.content?.[0]?.text || 'Pas de réponse.';
+    const reply = result.content?.[0]?.text || result.error || 'Pas de réponse.';
     chatHistories[id].push({ role: 'assistant', content: reply });
 
     document.getElementById('typing-' + id)?.remove();
