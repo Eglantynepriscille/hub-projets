@@ -399,7 +399,7 @@ const PROJECT_DATA = {
 
 let projects = [
   { id:1, title:'FIMANI — Textures Festival', type:'event', status:'planning', desc:'Valoriser et célébrer les cheveux texturés. Communauté mondiale, festival virtuel, académie en ligne.', progress:35, actions:5, date:'Festival 2026' },
-  { id:2, title:'Agent IA WhatsApp', type:'startup', status:'planning', desc:'Automatiser les prises de commandes des vendeurs via un agent conversationnel IA.', progress:0, actions:6, date:'Horizon: 16 sem.' },
+  { id:2, title:'Agent IA WhatsApp', type:'startup', status:'planning', desc:'Automatiser les prises de commandes des vendeurs via un agent conversationnel IA.', progress:0, actions:6, date:'Horizon: 16 sem.', sheet:'' },
   { id:3, title:'Tdoli', type:'startup', status:'planning', desc:'Projet à structurer — partagez votre vision pour générer la fiche complète.', progress:0, actions:1, date:'À définir' },
   { id:4, title:'ERP BTP', type:'startup', status:'planning', desc:'ERP dédié aux entreprises du secteur BTP — à structurer avec Claude.', progress:0, actions:1, date:'À définir' }
 ];
@@ -502,6 +502,8 @@ function openPanel(id) {
       </div>
       <div class="progress-bar" style="height:4px"><div class="progress-fill" style="width:${p.progress}%;background:${color}"></div></div>
     </div>
+    ${p.sheet?`<div style="margin-bottom:12px"><a href="${p.sheet}" target="_blank" style="font-size:12px;color:var(--accent2);text-decoration:none;display:flex;align-items:center;gap:5px"><span style="font-size:14px">📊</span> Google Sheet commandes ↗</a></div>`:''}
+
     <div class="panel-tabs">
       ${data.vision?'<button class="panel-tab active" onclick="switchTab(\'vision\',this)">Vision</button>':''}
       <button class="panel-tab ${!data.vision?'active':''}" onclick="switchTab('roadmap',this)">Roadmap</button>
