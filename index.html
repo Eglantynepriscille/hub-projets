@@ -698,12 +698,22 @@ async function sendChat() {
       body: JSON.stringify({ messages: chatHistory, projectContext: context })
     });
     const data = await res.json();
-    const reply = data.content[0].text;
+    if (!res.ok) {
+      loading.textContent = 'Erreur API : ' + (data.error?.message || res.status);
+      loading.classList.remove('loading');
+      return;
+    }
+    const reply = data.content?.[0]?.text;
+    if (!reply) {
+      loading.textContent = 'Réponse inattendue : ' + JSON.stringify(data);
+      loading.classList.remove('loading');
+      return;
+    }
     loading.remove();
     addMessage('ai', reply);
     chatHistory.push({ role: 'assistant', content: reply });
   } catch(e) {
-    loading.textContent = 'Erreur — réessaie dans un instant.';
+    loading.textContent = 'Erreur : ' + e.message;
     loading.classList.remove('loading');
   }
 }
