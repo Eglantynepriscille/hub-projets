@@ -413,8 +413,8 @@ const PROJECT_DATA = {
 };
 
 const DEFAULT_PROJECTS = [
-  { id:1, title:'FIMANI — Textures Festival', type:'event', status:'planning', desc:'Valoriser et célébrer les cheveux texturés. Communauté mondiale, festival virtuel, académie en ligne.', progress:35, actions:5, date:'Festival 2026' },
-  { id:2, title:'Agent IA WhatsApp', type:'startup', status:'planning', desc:'Automatiser les prises de commandes des vendeurs via un agent conversationnel IA.', progress:0, actions:6, date:'Horizon: 16 sem.', sheet:'https://docs.google.com/spreadsheets/d/10kg4uUJK1QCtQTCGB7MeEs_7HbkT7iFRgHkUxMaQJrA/edit?gid=0#gid=0' },
+  { id:1, title:'FIMANI — Textures Festival', type:'event', status:'active', desc:'Valoriser et célébrer les cheveux texturés. Communauté mondiale, festival virtuel, académie en ligne.', progress:35, actions:5, date:'Festival 2026' },
+  { id:2, title:'Agent IA WhatsApp', type:'startup', status:'planning', desc:'Automatiser les prises de commandes des vendeurs via un agent conversationnel IA.', progress:0, actions:6, date:'Horizon: 16 sem.' },
   { id:3, title:'Tdoli', type:'startup', status:'planning', desc:'Projet à structurer — partagez votre vision pour générer la fiche complète.', progress:0, actions:1, date:'À définir' },
   { id:4, title:'ERP BTP', type:'startup', status:'planning', desc:'ERP dédié aux entreprises du secteur BTP — à structurer avec Claude.', progress:0, actions:1, date:'À définir' }
 ];
@@ -426,23 +426,10 @@ function save() { try { localStorage.setItem('hub_v2', JSON.stringify(projects))
 function load() {
   try {
     const s = localStorage.getItem('hub_v2');
-    if (s) {
-      projects = JSON.parse(s);
-    } else {
-      projects = [
-        { id:1, title:'FIMANI — Textures Festival', type:'event', status:'active', desc:'Valoriser et célébrer les cheveux texturés. Communauté mondiale, festival virtuel, académie en ligne.', progress:35, actions:5, date:'Festival 2026' },
-        { id:2, title:'Agent IA WhatsApp', type:'startup', status:'planning', desc:'Automatiser les prises de commandes des vendeurs via un agent conversationnel IA.', progress:0, actions:6, date:'Horizon: 16 sem.' },
-        { id:3, title:'Tdoli', type:'startup', status:'planning', desc:'Projet à structurer.', progress:0, actions:1, date:'À définir' },
-        { id:4, title:'ERP BTP', type:'startup', status:'planning', desc:'ERP dédié aux entreprises du secteur BTP.', progress:0, actions:1, date:'À définir' }
-      ];
-    }
+    if (s) projects = JSON.parse(s);
+    else projects = [...DEFAULT_PROJECTS];
   } catch(e) {
-    projects = [
-      { id:1, title:'FIMANI — Textures Festival', type:'event', status:'active', desc:'Valoriser et célébrer les cheveux texturés. Communauté mondiale, festival virtuel, académie en ligne.', progress:35, actions:5, date:'Festival 2026' },
-      { id:2, title:'Agent IA WhatsApp', type:'startup', status:'planning', desc:'Automatiser les prises de commandes des vendeurs via un agent conversationnel IA.', progress:0, actions:6, date:'Horizon: 16 sem.' },
-      { id:3, title:'Tdoli', type:'startup', status:'planning', desc:'Projet à structurer.', progress:0, actions:1, date:'À définir' },
-      { id:4, title:'ERP BTP', type:'startup', status:'planning', desc:'ERP dédié aux entreprises du secteur BTP.', progress:0, actions:1, date:'À définir' }
-    ];
+    projects = [...DEFAULT_PROJECTS];
   }
 }
 
