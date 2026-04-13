@@ -11,7 +11,7 @@ export default async function handler(req, res) {
       'anthropic-version': '2023-06-01'
     },
     body: JSON.stringify({
-      model: 'claude-sonnet-4-20250514',
+      model: 'claude-sonnet-4-6',
       max_tokens: 1024,
       system: 'Tu es un assistant expert en gestion de projets. Tu aides à structurer, mettre à jour et améliorer les projets. Contexte du projet : ' + projectContext,
       messages: messages
